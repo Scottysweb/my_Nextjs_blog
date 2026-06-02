@@ -1,0 +1,29 @@
+import { Resend } from 'resend';
+
+export default function ContactPage() {
+  async function sendEmail(formData: FormData) {
+    'use server'; // Marks this function to run only on the server
+    
+    const name = formData.get('name');
+    const email = formData.get('email');
+    const message = formData.get('message');
+
+    const resend = new Resend(process.env.RESEND_API_KEY);
+
+    await resend.emails.send({
+      from: 'Contact Form <onboarding@resend.dev>',
+      to: 'scottbeatty76@gmail.com',
+      subject: `New submission from ${name}`,
+      html: `<p>${message}</p><p>Reply to: ${email}</p>`,
+    });
+  }
+
+  return (
+    <form action={sendEmail}>
+      <input type="text" name="name" required placeholder="Your Name" />
+      <input type="email" name="email" required placeholder="Your Email" />
+      <textarea name="message" required placeholder="Your Message" />
+      <button type="submit">Send Email</button>
+    </form>
+  );
+}

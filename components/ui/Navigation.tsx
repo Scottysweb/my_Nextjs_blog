@@ -11,7 +11,7 @@ export default function Navigation() {
     // Navigation items array
     const navItems = [
         { name: "Home", href: "/" },
-        { name: "Contact", href: "/components/ui/contact" },
+        { name: "Contact", href: "/" },
         { name: "Services", href:"#" },
         { name: "Feedback", href: "#" },
     ];

@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+/.vs/my_Nextjs_blog.slnx/FileContentIndex/abf18fb4-b42c-49ec-b4dd-7b6325bb90f4.vsidx
+/.vs/my_Nextjs_blog.slnx/FileContentIndex/d41fd19b-eb49-4fb4-8665-26f6b29319bf.vsidx
+/.vs/my_Nextjs_blog.slnx/FileContentIndex/11804ff1-93aa-41af-b1fa-d5916bcc235d.vsidx
+/.vs/my_Nextjs_blog.slnx/FileContentIndex/bb6fda67-53c0-4c16-98f6-dff095b83c68.vsidx
+/.vs/my_Nextjs_blog.slnx/FileContentIndex/4281db17-3494-4f35-b006-0762e3540b25.vsidx
+/.vs/my_Nextjs_blog.slnx/FileContentIndex

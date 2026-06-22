@@ -2,7 +2,7 @@
 import * as motion from "motion/react-client";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-
+import Link from 'next/link';
 export default function HeroSection() {
     return (
         <section className="min-h-[90vh] flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden">
@@ -19,7 +19,10 @@ export default function HeroSection() {
                             NEXTJS{" "}
                             <span className="text-primary font-blue-200 italic">Project</span>
                         </h1>
-
+                        <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl font-italic text-blue-600">
+                            Check out my latest part of this Project "MyChart" where I used Chart.js to 
+                            create a dynamic Chart that updates in real time.
+                        </p>
                         <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl font-italic">
                             This is a NEXT JS Project for part of my portfilio 
                             It uses NextJS, Typescript, Motion and Tailwin CSS 
@@ -31,7 +34,7 @@ export default function HeroSection() {
                             transition={{ duration: 0.8, delay: 0.2 }}
                         >
                             <Button className="bg-blue-300 hover:bg-green-500 text-white px-8 py-2 rounded-md">
-                                Goto PHP
+                                <Link href="https://ottawagaragesales.ca/Portfolio/myjq.php" target="_blank" rel="noopener noreferrer">Goto my PHP Page</Link>
                                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1" />
                             </Button>
                                 

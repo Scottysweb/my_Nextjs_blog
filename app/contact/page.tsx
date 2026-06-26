@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import dynamic from 'next/dynamic';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -10,56 +11,58 @@ import {
     Tooltip,
     Legend,
 } from 'chart.js';
-import { Bar } from 'react-chartjs-2';
-import { color } from 'chart.js/helpers';
 
 // Register the required Chart.js components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-export default function ChartPage() {
-    // 1. Set up state for the 4 text boxes
-    const [FirstSong, setFirstSong] = useState<number>(12);
-    const [SecSong, setSecSong] = useState<number>(19);
-    const [ThirdSong, setThirdSong] = useState<number>(3);
-    const [FourthSong, setFourthSong] = useState<number>(5);
+// 1. Force the Bar chart component to only load on the client side (No SSR)
+const BarChart = dynamic(
+    () => import('react-chartjs-2').then((mod) => mod.Bar),
+    { ssr: false }
+);
 
-    // 2. Construct the Chart.js data object using your state variables
+export default function ChartPage() {
+    // 2. Set up state for the 4 text boxes
+    const [FirstSong, setFirstSong] = useState(12);
+    const [SecSong, setSecSong] = useState(19);
+    const [ThirdSong, setThirdSong] = useState(3);
+    const [FourthSong, setFourthSong] = useState(5);
+
+    // 3. Construct the Chart.js data object
     const data = {
         labels: ['Pink Floyd', 'GunsNRoses', 'Motley Crue', 'Poison'],
         datasets: [
             {
                 label: 'Favorite Hair Band',
                 data: [FirstSong, SecSong, ThirdSong, FourthSong],
-                backgroundColor: 'rgb(38, 209, 116)', // 
+                backgroundColor: 'rgb(38, 209, 116)',
                 borderColor: 'rgba(59, 130, 246, 1)',
                 borderWidth: 1,
             },
         ],
     };
 
-    // 3. Define basic configuration options for the chart
+    // 4. Define configuration options
     const options = {
         plugins: {
             legend: {
                 labels: {
-                    // This changes the color of the legend text ("Favorite Hair Band")
-                    color: 'Blue', // Set your desired color here (e.g., white)
+                    color: 'Blue',
                     font: {
-                        size: 14 // Optional: change font size
+                        size: 14
                     }
                 }
             }
         },
         scales: {
-            // This changes the color of the axis labels ('Pink Floyd', 'GunsNRoses', etc.)
             x: {
                 ticks: {
-                    color: 'Blue', // Color of X-axis labels
+                    color: 'Blue',
                 }
             },
             y: {
                 ticks: {
-                    color: 'Blue', // Color of Y-axis labels
+                    color: 'Blue',
                 }
             }
         }
@@ -72,7 +75,7 @@ export default function ChartPage() {
             {/* Grid layout for the 4 text box inputs */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '2rem' }}>
                 {[
-                    { label: 'Pink Floyd', value: FirstSong, setter: setFirstSong, color: 'red'},
+                    { label: 'Pink Floyd', value: FirstSong, setter: setFirstSong },
                     { label: 'GunsNRoses', value: SecSong, setter: setSecSong },
                     { label: 'Motley Crue', value: ThirdSong, setter: setThirdSong },
                     { label: 'Poison', value: FourthSong, setter: setFourthSong },
@@ -100,7 +103,8 @@ export default function ChartPage() {
 
             {/* Container for the Chart.js Canvas */}
             <div style={{ height: '350px', position: 'relative', width: '100%' }}>
-                <Bar data={data} options={options} />
+                {/* 5. Use the dynamically imported BarChart component here instead of <Bar /> */}
+                <BarChart data={data} options={options} />
             </div>
         </div>
     );
